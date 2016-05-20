@@ -8,3 +8,4 @@ Description: Description for the module
 Features:
     Hazza.RelatedContent:
         Description: Description for feature Hazza.RelatedContent.
+		Dependencies: Lucene
