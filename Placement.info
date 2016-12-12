@@ -1,0 +1,8 @@
+﻿<Placement>
+  <Match DisplayType="Detail">
+    <Place Parts_RelatedContentPart="Content:3" />
+  </Match>
+    <Match DisplayType="SummaryAdmin">
+        <Place Parts_RelatedContentPart="-" />
+    </Match>
+</Placement>

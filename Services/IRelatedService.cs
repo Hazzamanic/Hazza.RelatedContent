@@ -49,7 +49,7 @@ namespace Hazza.RelatedContent.Services {
             var indexSearcher = new IndexSearcher(reader);
             var analyzer = _analyzerProvider.GetAnalyzer(indexName);
 
-            var mlt = new MoreLikeThis(reader) {Boost = true, MinWordLen = 1, MinTermFreq = 1, Analyzer = analyzer, MinDocFreq = 1, MaxQueryTerms = 12};
+            var mlt = new MoreLikeThis(reader) {Boost = true, MinWordLen = 1, MinTermFreq = 1, Analyzer = analyzer, MinDocFreq = 1};
             if (context.FieldNames.Length > 0) {
                 mlt.SetFieldNames(context.FieldNames);
             }

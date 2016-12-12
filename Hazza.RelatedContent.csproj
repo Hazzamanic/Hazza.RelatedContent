@@ -130,10 +130,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Views\" />
+    <Folder Include="Views\EditorTemplates\Parts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="Views\Parts\RelatedContentPart.cshtml" />
+    <Content Include="Placement.info" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -142,7 +144,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Drivers\RelatedContentPartDriver.cs" />
+    <Compile Include="Handlers\RelatedContentPartHandler.cs" />
     <Compile Include="Models\RelatedContentContext.cs" />
+    <Compile Include="Models\RelatedContentPart.cs" />
+    <Compile Include="RelatedContentMigration.cs" />
     <Compile Include="Services\IRelatedService.cs" />
   </ItemGroup>
   <PropertyGroup>
