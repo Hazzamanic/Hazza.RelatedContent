@@ -129,7 +129,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Folder Include="Controllers\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
@@ -142,7 +142,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Models\RelatedContentContext.cs" />
     <Compile Include="Services\IRelatedService.cs" />
   </ItemGroup>
   <PropertyGroup>
