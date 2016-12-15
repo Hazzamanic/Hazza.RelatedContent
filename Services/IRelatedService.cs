@@ -49,18 +49,34 @@ namespace Hazza.RelatedContent.Services {
             var indexSearcher = new IndexSearcher(reader);
             var analyzer = _analyzerProvider.GetAnalyzer(indexName);
 
-            var mlt = new MoreLikeThis(reader) {Boost = true, MinWordLen = 1, MinTermFreq = 1, Analyzer = analyzer, MinDocFreq = 1};
+            var mlt = new MoreLikeThis(reader) {Boost = true, MinTermFreq = 1, Analyzer = analyzer, MinDocFreq = 1};
             if (context.FieldNames.Length > 0) {
                 mlt.SetFieldNames(context.FieldNames);
             }
+            
+            var sReader = new StringReader("dennis");
+
+            mlt.SetFieldNames(new string[] { "title", "body", "tags" });
+            var test = mlt.Like(sReader);
+            var hitsss = indexSearcher.Search(test, 3);
+            var c = hitsss.TotalHits;
 
             var docid = GetDocumentId(id, indexSearcher);
             Filter filter;
-            BooleanQuery query = (BooleanQuery) mlt.Like(docid);
+            var d = reader.Document(docid);
+            System.String[] text = d.GetValues("title");
+            if (text != null) {
+                for (int j = 0; j < text.Length; j++) {
+                    var x = text[j];
+                }
+            }
+
+            //BooleanQuery query = (BooleanQuery) mlt.Like(docid);
+            var query = mlt.Like(docid);
 
             if (!String.IsNullOrWhiteSpace(context.ContentType)) {
                 var contentTypeQuery = new TermQuery(new Term("type", context.ContentType));
-                query.Add(new BooleanClause(contentTypeQuery, Occur.MUST));
+                //query.Add(new BooleanClause(contentTypeQuery, Occur.MUST));
             }
 
             TopDocs simDocs = indexSearcher.Search(query, context.Count);

@@ -7,6 +7,6 @@ namespace Hazza.RelatedContent.Models {
     public class RelatedContentContext {
         public string[] FieldNames { get; set; } = new string[0];
         public string ContentType { get; set; }
-        public int Count { get; set; } = 10;
+        public int Count { get; set; } = 4;
     }
 }
