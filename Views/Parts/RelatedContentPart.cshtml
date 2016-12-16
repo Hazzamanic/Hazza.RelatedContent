@@ -33,13 +33,9 @@
     IEnumerable<IContent> content = Model.RelatedContent;
 }
 
-<div class="row">
  @foreach (var con in content) {
-    <p>hello @Html.ItemDisplayText(con)</p>
      @Display(BuildDisplay(con, displayType: "summary"))
-
  }
-</div>
 
 @using (Script.Foot()) {
     <script type="text/javascript">
