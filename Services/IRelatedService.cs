@@ -43,41 +43,28 @@ namespace Hazza.RelatedContent.Services {
         }
 
         public IEnumerable<ISearchHit> GetRelatedItems(int id, RelatedContentContext context) {
-            var indexName = "search";
-
-            IndexReader reader = IndexReader.Open(GetDirectory("search"), true);
+            IndexReader reader = IndexReader.Open(GetDirectory(context.Index), true);
             var indexSearcher = new IndexSearcher(reader);
-            var analyzer = _analyzerProvider.GetAnalyzer(indexName);
+            var analyzer = _analyzerProvider.GetAnalyzer(context.Index);
 
             var mlt = new MoreLikeThis(reader) {Boost = true, MinTermFreq = 1, Analyzer = analyzer, MinDocFreq = 1};
             if (context.FieldNames.Length > 0) {
                 mlt.SetFieldNames(context.FieldNames);
             }
-            
-            var sReader = new StringReader("dennis");
-
-            mlt.SetFieldNames(new string[] { "title", "body", "tags" });
-            var test = mlt.Like(sReader);
-            var hitsss = indexSearcher.Search(test, 3);
-            var c = hitsss.TotalHits;
 
             var docid = GetDocumentId(id, indexSearcher);
             Filter filter;
-            var d = reader.Document(docid);
-            System.String[] text = d.GetValues("title");
-            if (text != null) {
-                for (int j = 0; j < text.Length; j++) {
-                    var x = text[j];
-                }
-            }
 
-            //BooleanQuery query = (BooleanQuery) mlt.Like(docid);
-            var query = mlt.Like(docid);
+            BooleanQuery query = (BooleanQuery) mlt.Like(docid);
 
             if (!String.IsNullOrWhiteSpace(context.ContentType)) {
                 var contentTypeQuery = new TermQuery(new Term("type", context.ContentType));
-                //query.Add(new BooleanClause(contentTypeQuery, Occur.MUST));
+                query.Add(new BooleanClause(contentTypeQuery, Occur.MUST));
             }
+
+            // exclude same doc
+            var exclude = new TermQuery(new Term("id", id.ToString()));
+            query.Add(new BooleanClause(exclude, Occur.MUST_NOT));
 
             TopDocs simDocs = indexSearcher.Search(query, context.Count);
             var results = simDocs.ScoreDocs

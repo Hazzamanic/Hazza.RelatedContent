@@ -1,0 +1,29 @@
+﻿@model Hazza.RelatedContent.Settings.RelatedContentPartSettings
+
+<fieldset>
+    <legend></legend>
+	<div>
+			@Html.LabelFor(m => m.Index, T("Index"))
+			@Html.EditorFor(m => m.Index)
+			<span class="hint">@T("")</span>
+			@Html.ValidationMessage("Index", "*")
+		</div>
+	<div>
+			@Html.LabelFor(m => m.Fields, T("Fields"))
+			@Html.EditorFor(m => m.Fields)
+			<span class="hint">@T("")</span>
+			@Html.ValidationMessage("Fields", "*")
+		</div>
+	<div>
+			@Html.LabelFor(m => m.NoOfItems, T("No Of Items"))
+			@Html.EditorFor(m => m.NoOfItems)
+			<span class="hint">@T("")</span>
+			@Html.ValidationMessage("NoOfItems", "*")
+		</div>
+	<div>
+			@Html.LabelFor(m => m.ContentType, T("Content Type"))
+			@Html.EditorFor(m => m.ContentType)
+			<span class="hint">@T("")</span>
+			@Html.ValidationMessage("ContentType", "*")
+		</div>
+</fieldset>

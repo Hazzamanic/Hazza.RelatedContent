@@ -140,6 +140,7 @@
     <Content Include="packages.config" />
     <Content Include="Views\Parts\RelatedContentPart.cshtml" />
     <Content Include="Placement.info" />
+    <Content Include="Views\DefinitionTemplates\RelatedContentPartSettings.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -156,6 +157,8 @@
     <Compile Include="RelatedContentMigration.cs" />
     <Compile Include="Services\IRelatedService.cs" />
     <Compile Include="Services\LuceneIndexProvider.cs" />
+    <Compile Include="Settings\RelatedContentPartEditorEvents.cs" />
+    <Compile Include="Settings\RelatedContentPartSettings.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
